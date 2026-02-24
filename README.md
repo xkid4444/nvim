@@ -6,3 +6,6 @@ Refer to the [documentation](https://lazyvim.github.io/installation) to get star
 Additionally added python plugins by [xkid4444](https://github.com/xkid4444/nvim)
 *log_highlight.py*
   custom highlights for log analysis
+*log_analyse.py*
+  custom tools for log analysis
+
