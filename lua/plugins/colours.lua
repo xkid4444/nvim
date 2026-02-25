@@ -7,7 +7,7 @@ return {
       require("onedark").setup({
         style = "darker",
       })
-      -- require("onedark").load()
+      require("onedark").load()
     end,
   },
   {
@@ -18,7 +18,7 @@ return {
       require("cyberdream").setup({
         style = "dark",
       })
-      require("cyberdream").load()
+      -- require("cyberdream").load()
     end,
   },
 }

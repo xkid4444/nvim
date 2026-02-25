@@ -17,7 +17,7 @@ class LogHighlighter(object):
             "logDate": {"fg": "#404070"},
             "logDebug": {"fg": "#FFFF00", "italic": True},
             ## SVT specific
-            "logCommandPrefix": {"fg": "#FFAFFF"},
+            "logCommandPrefix": {"fg": "#FFD0FF"},
             "logCommand": {"fg": "#FFC500"},
             "logComment": {"fg": "#928374"},
             "logSteps": {"fg": "#FF44FF"},
@@ -32,7 +32,7 @@ class LogHighlighter(object):
         for name, opts in theme.items():
             self.nvim.api.set_hl(0, name, opts)
 
-    @pynvim.autocmd("BufReadPost,BufEnter", pattern="*.log", sync=True)
+    @pynvim.autocmd("BufRead,BufEnter", pattern="*.txt,*.log", sync=True)
     def apply_highlights(self):
         self.setup_highlights()
 
