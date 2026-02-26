@@ -14,15 +14,15 @@ class LogHighlighter(object):
             "logWarn": {"fg": "#FFA500"},
             "logPass": {"fg": "#22FF22"},
             "logInfo": {"fg": "#00FFFF"},
-            "logDate": {"fg": "#404070"},
+            "logDate": {"fg": "#444474"},
             "logDebug": {"fg": "#FFFF00", "italic": True},
             ## SVT specific
             "logCommandPrefix": {"fg": "#FFD0FF"},
             "logCommand": {"fg": "#FFC500"},
             "logComment": {"fg": "#928374"},
             "logSteps": {"fg": "#FF44FF"},
-            "logHex": {"fg": "#AFFFAF"},
-            "logBitstr": {"fg": "#FFAFAF"},
+            "logHex": {"fg": "#AFFF0F"},
+            "logBitstr": {"fg": "#FF0FAF"},
             "logInt": {"fg": "#0FAFFF"},
             "logLowExeTime": {"fg": "#00FF00"},
             "logMidExeTime": {"fg": "#FFFF00"},
@@ -46,7 +46,7 @@ class LogHighlighter(object):
 
         self.nvim.command(r"syntax match logInt /\v<\d+>/")
         self.nvim.command(r"syntax match logBitstr /\v<[x01]{8,}>/")
-        self.nvim.command(r"syntax match logHex /\v<0x[0-9A-Za-z]{1,}/")
+        self.nvim.command(r"syntax match logHex /\v<0x[0-9A-Za-z]{1,}>/")
 
         # gpio_cmd = "MR|PR|RD|AL|WE|WDERR|SPI_ER|SPI_RD|SPI_DN|SSS|"
         # commands = "SEND|POLL|RECV|VM|RM|VBS|WBS|FLUSH|SPICFG|SLEEP|WGPIO|WBSI|NEWBFR|WBFR|SENDX|COPYF2X"

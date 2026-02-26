@@ -4,7 +4,7 @@ return {
     opts = {
       bigfile = {
         -- enabled = false,
-        size = 100 * 1024 * 1024,
+        size = 200 * 1024 * 1024,
       },
     },
   },
