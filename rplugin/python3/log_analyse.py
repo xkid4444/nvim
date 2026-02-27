@@ -64,6 +64,9 @@ class LogFiles(object):
             self.window_handler = self.nvim.api.open_win(
                 self.buffer_handler, False, opts
             )
+
+            self.nvim.api.win_set_option(self.window_handler, "winblend", 15)
+
             self.nvim.api.set_option_value(
                 "winhighlight", "Normal:NormalFloat", {"win": self.window_handler}
             )
