@@ -20,13 +20,37 @@ vim.api.nvim_create_autocmd("User", {
     require("nvim-treesitter.parsers").log = {
       install_info = {
         -- change path as need (try to use full paths)
-        path = "~/parsers/tree-sitter-log",
+        path = "C:/Users/ben.lee/AppData/Local/nvim/tree-sitter-log",
+        url = "",
         -- optional entries
-        location = "parser",
+        -- location = "parser",
         generate = true,
-        generate_from_json = false,
-        -- queries = "queries/neovim", -- symlink queries from given directory
+        -- generate_from_json = true,
+        queries = "queries", -- symlink queries from given directory
       },
+      filetype = "log",
     }
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "TSUpdate",
+  callback = function()
+    require("nvim-treesitter.config").setup({
+      ensure_installed = { "lua", "vim", "query", "markdown", "markdown_inline", "log" },
+      highlight = { enable = true },
+      textobjects = {
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+          },
+        },
+      },
+    })
   end,
 })

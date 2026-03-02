@@ -5,6 +5,10 @@
 -- add yank to clipboard
 vim.opt.clipboard = "unnamedplus"
 
+-- fold options
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
 -- add log type to be recognised
 vim.filetype.add({
   extension = {
