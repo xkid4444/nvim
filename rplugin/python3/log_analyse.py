@@ -34,7 +34,7 @@ class LogFiles(object):
         if self.buffer_handler is not None:
             self.buffer_handler = None
 
-        if filename.endswith(".log"):
+        if filename.endswith(".log") or filename.endswith(".txt"):
             self.get_steps()
             self.buffer_handler = self.nvim.api.create_buf(False, True)
 
@@ -57,7 +57,7 @@ class LogFiles(object):
                 "row": 1,
                 "anchor": "NW",
                 "style": "minimal",
-                "border": ["╔", "═", "╗", "║", "╝", "═", "╚", "║"],
+                # "border": ["╔", "═", "╗", "║", "╝", "═", "╚", "║"],
                 "focusable": False,
             }
 
