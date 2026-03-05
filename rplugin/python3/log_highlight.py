@@ -6,6 +6,34 @@ class LogHighlighter(object):
     def __init__(self, nvim):
         self.nvim = nvim
 
+    # @pynvim.autocmd("BufRead,BufEnter", pattern="*.txt,*.log", sync=True)
+    def log_highlights(self):
+        self.nvim.api.set_hl(0, "@timeDef", {"fg": "#FF0000", "italic": True})
+        theme = {
+            # "logError": {"fg": "#FF0000", "bold": True, "underline": True},
+            "@failureType": {"fg": "#FF0000", "bold": True},
+            # "logWarn": {"fg": "#FFA500"},
+            "@successType": {"fg": "#22FF22"},
+            # "logInfo": {"fg": "#00FFFF"},
+            "@timeDef": {"fg": "#444474"},
+            # "logDebug": {"fg": "#FFFF00", "italic": True},
+            ## SVT specific
+            "@commandPrefix": {"fg": "#FFD0FF"},
+            "@commandDef": {"fg": "#FFC500"},
+            "@cmtDef": {"fg": "#928374"},
+            "@stepStart": {"fg": "#FF44FF"},
+            "@stepEnd": {"fg": "#FF44FF"},
+            # "logHex": {"fg": "#AFFF0F"},
+            # "logBitstr": {"fg": "#FF0FAF"},
+            # "logInt": {"fg": "#0FAFFF"},
+            "@intd2Type": {"fg": "#00FF00"},
+            "@intd4Type": {"fg": "#FFFF00"},
+            "@intdxType": {"fg": "#FF5C00"},
+        }
+
+        for name, opts in theme.items():
+            self.nvim.api.set_hl(0, name, opts)
+
     def setup_highlights(self):
         # Using a dictionary to manage your theme
         theme = {
