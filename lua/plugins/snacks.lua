@@ -3,7 +3,7 @@ return {
   opts = {
     bigfile = {
       notify = true,
-      size = 200 * 1024 * 1024,
+      size = 100 * 1024 * 1024,
       line_length = 1000,
     },
     dashboard = {
@@ -72,8 +72,8 @@ return {
         { pane = 1, section = "header" },
         { pane = 1, section = "startup" },
         { pane = 2, section = "keys", gap = 1, padding = 1 },
-        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
         -- {
         --   pane = 2,
         --   section = "terminal",
