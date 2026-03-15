@@ -4,7 +4,7 @@ import pynvim
 import threading
 
 from difflib import SequenceMatcher
-from AutoLogAnalysis.tools.BlockParser import BlockParser
+from AutoLogAnalysis.BlockParser import BlockParser
 from AutoLogAnalysis.JiraManager import JiraManager
 
 

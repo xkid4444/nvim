@@ -3,7 +3,7 @@ return {
   opts = {
     bigfile = {
       notify = true,
-      size = 100 * 1024 * 1024,
+      size = 50 * 1024 * 1024,
       line_length = 1000,
     },
     dashboard = {

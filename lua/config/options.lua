@@ -4,6 +4,7 @@
 
 -- add yank to clipboard
 vim.opt.clipboard = "unnamedplus"
+vim.opt.swapfile = false
 
 -- fold options
 vim.opt.foldmethod = "expr"
