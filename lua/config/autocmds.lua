@@ -54,3 +54,10 @@ vim.api.nvim_create_autocmd("User", {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MoltenInitPost",
+  callback = function()
+    vim.api.nvim_set_hl(0, "MoltenVirtualText", { fg = "#FFFF44", bg = "#222222", sp = "#FF0000", italic = true })
+  end,
+})
