@@ -58,6 +58,26 @@ vim.api.nvim_create_autocmd("User", {
 vim.api.nvim_create_autocmd("User", {
   pattern = "MoltenInitPost",
   callback = function()
-    vim.api.nvim_set_hl(0, "MoltenVirtualText", { fg = "#FFFF44", bg = "#222222", sp = "#FF0000", italic = true })
+    vim.api.nvim_set_hl(0, "MoltenVirtualText", { fg = "#FFFF44", bg = "#002222", sp = "#FF0000", italic = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MoltenKernelReady",
+  callback = function(args)
+    local dir = vim.fn.expand("%:p:h")
+
+    local project_marker = { "WSS.ini" }
+    local project_root = vim.fs.root(0, project_marker)
+
+    if project_root ~= nil then
+      dir = project_root
+    end
+    print("Kernel ID: " .. vim.fn.fnameescape(args.data.kernel_id) .. "\n" .. "Kernel DIR: " .. vim.fn.fnameescape(dir))
+
+    vim.g.molten_kernel_id = args.data.kernel_id
+    vim.cmd(
+      "MoltenEvaluateArgument " .. vim.fn.fnameescape(args.data.kernel_id) .. " %cd -q " .. vim.fn.fnameescape(dir)
+    )
   end,
 })
