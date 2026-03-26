@@ -18,6 +18,10 @@ return {
         "vim",
         "yaml",
       },
+      enable = true,
+      max_lines = 5,
+      multiline_threshold = 10,
+      line_numbers = true,
     },
   },
 }
