@@ -9,7 +9,7 @@
 -- opts: A table with options like silent = true (don't show command in command line) or noremap = true
 
 -- ## select all
-vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+-- vim.keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- ## next buffer
 vim.keymap.set("n", "<Tab>", ":BufferLineCycleNext<CR>", { noremap = true, silent = true, desc = "Next Tab" })

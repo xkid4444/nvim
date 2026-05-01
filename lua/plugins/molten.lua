@@ -10,7 +10,13 @@ return {
     vim.g.molten_enter_output_behavior = "open_and_enter"
     vim.g.molten_auto_open_output = false
     vim.g.molten_virt_text_output = true
-    -- vim.g.molten_output_win_border = "-"
+    -- vim.g.molten_wrap_output = true
     vim.g.molten_virt_text_max_lines = 50
+    vim.g.molten_virt_text_truncate = "top"
+    -- vim.g.molten_floating_window_focus = "bottom"
+    -- vim.g.molten_output_win_border = "-"
+    if vim.env.TERM_PROGRAM == "WezTerm" then
+      vim.g.molten_image_provider = "wezterm"
+    end
   end,
 }

@@ -84,60 +84,25 @@ class LogFiles(object):
 
     def _check_db(self):
         file_path = self.nvim.current.buffer.name
-        bug_path = r"C:/Users/ben.lee/Desktop/code/AutoLogAnalysis/data/bugs"
 
-        csv_list = []
-        all_list = [
-            os.path.join(bug_path, r"03/Bugs.csv"),
-            os.path.join(bug_path, r"04/Bugs.csv"),
-            os.path.join(bug_path, r"06/Bugs.csv"),
-            os.path.join(bug_path, r"08/Bugs.csv"),
-            os.path.join(bug_path, r"09/Bugs.csv"),
-            os.path.join(bug_path, r"10/Bugs.csv"),
-            os.path.join(bug_path, r"13/Bugs.csv"),
-            os.path.join(bug_path, r"14/Bugs.csv"),
-            os.path.join(bug_path, r"16/Bugs.csv"),
-            os.path.join(bug_path, r"17/Bugs.csv"),
-            os.path.join(bug_path, r"18/Bugs.csv"),
-        ]
-        if "HROCM-03" in file_path:
-            csv_list.append(all_list[0])
-        if "HROCM-04" in file_path:
-            csv_list.append(all_list[1])
-        if "flex-06" in file_path:
-            csv_list.append(all_list[2])
-        if "flex-08" in file_path:
-            csv_list.append(all_list[3])
-        if "flex-09" in file_path:
-            csv_list.append(all_list[4])
-        if "flex-10" in file_path:
-            csv_list.append(all_list[5])
-        if "flex-13" in file_path:
-            csv_list.append(all_list[6])
-        if "flex-14" in file_path or "flex-114" in file_path:
-            csv_list.append(all_list[7])
-        if "flex-16" in file_path:
-            csv_list.append(all_list[8])
-        if "flex-17" in file_path:
-            csv_list.append(all_list[9])
-        if "flex-18" in file_path:
-            csv_list.append(all_list[10])
+        self.csv_file = os.path.expandvars(r"%userprofile%\Desktop\code\AutoLogAnalysis\data\bugs\GEM.csv")
+        if "HROCM" in file_path:
+            self.csv_file = os.path.expandvars(r"%userprofile%\Desktop\code\AutoLogAnalysis\data\bugs\OOZ.csv")
 
-        if len(csv_list) == 0:
-            csv_list = all_list
+        if not os.path.exists(self.csv_file):
+            raise(ValueError(f"csv file doesnt exist: {self.csv_file}"))
 
         bug_list = []
 
-        for csv_file in csv_list:
-            file = open(csv_file)
+        file = open(self.csv_file)
 
-            for line in csv.reader(file):
-                if line[0] == "BugID":
-                    continue
+        for line in csv.reader(file):
+            if line[0] == "BugID":
+                continue
 
-                bug_list.append(line)
+            bug_list.append(line)
 
-            file.close()
+        file.close()
 
         return bug_list
 
@@ -175,14 +140,12 @@ class LogFiles(object):
         info_msg = "Calling pest control...\\n"
 
         jm = JiraManager(username="ben.lee")
-        proj_list = ["GEM", "OOZ"]
-        for p in proj_list:
-            info_msg += f"    Looking for {p}   󰃤  󰨰\\n"
-            jm_thread = threading.Thread(
-                target=jm.SearchProject, args=(p,), daemon=True
-            )
-            jm_thread.start()
-            # jm_thread.join(timeout=60) ## blocking
+        info_msg += f"    Looking for {p}   󰃤  󰨰\\n"
+        jm_thread = threading.Thread(
+            target=jm.SearchProject, daemon=True
+        )
+        jm_thread.start()
+        # jm_thread.join(timeout=60) ## blocking
 
         cmd_msg = 'lua print("' + info_msg + '")'
         self.nvim.command(cmd_msg)

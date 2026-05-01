@@ -1,10 +1,23 @@
 return {
-  "snacks.nvim",
+  "folke/snacks.nvim",
   opts = {
     bigfile = {
       notify = true,
       size = 50 * 1024 * 1024,
-      line_length = 1000,
+      line_length = 2000,
+      setup = function(ctx)
+        -- Standard Snacks optimisations
+        Snacks.util.wo(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
+
+        -- Disable remote plugins for this buffer
+        vim.b.loaded_remote_plugins = 1
+
+        -- Specifically target common heavy plugins if you use them
+        vim.b.coc_enabled = 0
+
+        -- Optional: Notify for confirmation
+        vim.notify("Bigfile detected: Remote plugins and LSP disabled", vim.log.levels.WARN)
+      end,
     },
     dashboard = {
       preset = {
