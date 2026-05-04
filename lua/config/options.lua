@@ -10,6 +10,9 @@ vim.opt.swapfile = false
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
+-- set nowrap
+vim.opt.wrap = false
+
 -- add log type to be recognised
 vim.filetype.add({
   extension = {

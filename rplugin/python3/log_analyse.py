@@ -18,6 +18,7 @@ class LogFiles(object):
 
         self.window_handler = None
         self.buffer_handler = None
+        self.display_steps = False
 
     def get_steps(self):
         """
@@ -31,8 +32,17 @@ class LogFiles(object):
             if line.startswith("#Test") and "- Start" in line:
                 self.step_lines[ii] = line
 
-    @pynvim.autocmd("BufEnter", pattern="*", eval="expand('<afile>')", sync=True)
-    def display_step(self, filename):
+    # @pynvim.autocmd("BufEnter", pattern="*", eval="expand('<afile>')", sync=True)
+    @pynvim.command(name="LogSteps", sync=False)
+    def display_step(self):
+        self.display_steps = not self.display_steps
+        if not self.display_steps:
+            self.nvim.api.win_close(self.window_handler, True)
+            self.window_handler = None
+            self.buffer_handler = None
+            return
+
+        filename = self.nvim.current.buffer.name
         if self.window_handler is not None:
             try:
                 self.nvim.api.win_close(self.window_handler, True)
@@ -85,12 +95,16 @@ class LogFiles(object):
     def _check_db(self):
         file_path = self.nvim.current.buffer.name
 
-        self.csv_file = os.path.expandvars(r"%userprofile%\Desktop\code\AutoLogAnalysis\data\bugs\GEM.csv")
+        self.csv_file = os.path.expandvars(
+            r"%userprofile%\Desktop\code\AutoLogAnalysis\data\bugs\GEM.csv"
+        )
         if "HROCM" in file_path:
-            self.csv_file = os.path.expandvars(r"%userprofile%\Desktop\code\AutoLogAnalysis\data\bugs\OOZ.csv")
+            self.csv_file = os.path.expandvars(
+                r"%userprofile%\Desktop\code\AutoLogAnalysis\data\bugs\OOZ.csv"
+            )
 
         if not os.path.exists(self.csv_file):
-            raise(ValueError(f"csv file doesnt exist: {self.csv_file}"))
+            raise (ValueError(f"csv file doesnt exist: {self.csv_file}"))
 
         bug_list = []
 
@@ -141,9 +155,7 @@ class LogFiles(object):
 
         jm = JiraManager(username="ben.lee")
         info_msg += f"    Looking for {p}   󰃤  󰨰\\n"
-        jm_thread = threading.Thread(
-            target=jm.SearchProject, daemon=True
-        )
+        jm_thread = threading.Thread(target=jm.SearchProject, daemon=True)
         jm_thread.start()
         # jm_thread.join(timeout=60) ## blocking
 
