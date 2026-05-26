@@ -13,6 +13,12 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 -- set nowrap
 vim.opt.wrap = false
 
+-- auto resizing
+vim.o.equalalways = false
+
+-- autoread changes
+vim.opt.autoread = true
+
 -- add log type to be recognised
 vim.filetype.add({
   extension = {
