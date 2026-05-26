@@ -60,8 +60,15 @@ class LogHighlighter(object):
         for name, opts in theme.items():
             self.nvim.api.set_hl(0, name, opts)
 
-    @pynvim.autocmd("BufRead,BufEnter", pattern="*.txt,*.log", sync=True)
+    @pynvim.autocmd(
+        # "FocusGained,CursorHold,BufEnter",
+        "BufEnter",
+        pattern="*.txt,*.log",
+        sync=True,
+    )
     def apply_highlights(self):
+        self.nvim.command("checktime")
+
         self.setup_highlights()
 
         self.nvim.command(r"syntax match logComment /#.*/")
