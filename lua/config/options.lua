@@ -11,7 +11,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- set nowrap
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 -- auto resizing
 vim.o.equalalways = false
@@ -19,35 +19,13 @@ vim.o.equalalways = false
 -- autoread changes
 vim.opt.autoread = true
 
+-- disable animations
+vim.g.snacks_animate = false
+
+
 -- add log type to be recognised
 vim.filetype.add({
   extension = {
     log = "log",
   },
 })
-
--- open drag and drop files to edit
-vim.paste = (function(overridden)
-  return function(lines, phase)
-    local files = {}
-
-    -- Identify all valid file paths in the pasted lines
-    for _, line in ipairs(lines) do
-      local path = line:gsub("^%s*(.-)%s*$", "%1") -- Trim whitespace
-      if path ~= "" and vim.fn.filereadable(path) == 1 then
-        table.insert(files, path)
-      end
-    end
-
-    -- If files were found, handle them and intercept the paste
-    if #files > 0 then
-      for i, path in ipairs(files) do
-        vim.cmd("edit " .. vim.fn.fnameescape(path))
-      end
-      return true -- Signal that the paste was handled
-    end
-
-    -- Otherwise, proceed with normal paste behavior
-    return overridden(lines, phase)
-  end
-end)(vim.paste)
