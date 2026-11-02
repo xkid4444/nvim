@@ -8,7 +8,7 @@ return {
         style = "darker",
         transparent = true,
       })
-      require("onedark").load()
+      -- require("onedark").load()
     end,
   },
   {
@@ -17,9 +17,22 @@ return {
     priority = 1000,
     config = function()
       require("cyberdream").setup({
-        style = "dark",
+        -- Variant: "default", "light", "muted", or "auto"
+        variant = "default",
+        -- Enable transparent background
+        transparent = false,
+        -- Saturation: 0 (greyscale) to 1 (full color)
+        saturation = 1,
+        -- Italic comments
+        italic_comments = false,
+        -- Clean look by hiding fillchars
+        hide_fillchars = false,
+        -- Modern borderless pickers (Telescope, Snacks, Fzf-lua)
+        borderless_pickers = false,
+        -- Terminal colors
+        terminal_colors = true,
       })
-      -- require("cyberdream").load()
+      require("cyberdream").load()
     end,
   },
 }
