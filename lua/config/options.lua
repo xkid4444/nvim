@@ -22,10 +22,5 @@ vim.opt.autoread = true
 -- disable animations
 vim.g.snacks_animate = false
 
-
--- add log type to be recognised
-vim.filetype.add({
-  extension = {
-    log = "log",
-  },
-})
+-- +/- 10 lines when scrolling
+vim.opt.scrolloff = 6
