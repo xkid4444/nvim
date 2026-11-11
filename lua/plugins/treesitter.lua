@@ -8,8 +8,11 @@ return {
         "javascript",
         "json",
         "lua",
+        "cpp",
         "markdown",
         "markdown_inline",
+        "rust",
+        "ron",
         "python",
         "query",
         "regex",
@@ -25,12 +28,14 @@ return {
     },
     highlight = {
       enable = true,
-      -- Disable for files larger than 100 KB
+      -- Disable for files larger than 200 MB
       disable = function(lang, buf)
-        local max_filesize = 80 * 1024 * 1024 -- 80 MB
+        local max_filesize = 200 * 1024 * 1024 -- 200 MB
         local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
         if ok and stats and stats.size > max_filesize then
           return true
+        else
+          return "log"
         end
       end,
     },

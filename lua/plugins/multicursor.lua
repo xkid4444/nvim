@@ -26,20 +26,25 @@ return {
       set({ "n", "x" }, "<C-d>", function()
         mc.matchAddCursor(1)
       end)
-      set({ "n", "x" }, "<leader>n", function()
-        mc.matchAddCursor(1)
-      end)
-
-      set({ "n", "x" }, "<leader>s", function()
+      set({ "n", "x" }, "<C-e>", function()
         mc.matchSkipCursor(1)
       end)
+      set({ "n", "x" }, "<C-a>", mc.matchAllAddCursors)
+
+      -- set({ "n", "x" }, "<leader>n", function()
+      --   mc.matchAddCursor(1)
+      -- end)
+      -- set({ "n", "x" }, "<leader>s", function()
+      --   mc.matchSkipCursor(1)
+      -- end)
+
       set({ "n", "x" }, "<leader>N", function()
         mc.matchAddCursor(-1)
       end)
       set({ "n", "x" }, "<leader>S", function()
         mc.matchSkipCursor(-1)
       end)
-      set({ "n", "x" }, "<leader>A", mc.matchAllAddCursors)
+      -- set({ "n", "x" }, "<leader>A", mc.matchAllAddCursors)
 
       -- Add and remove cursors with control + left click.
       set("n", "<c-leftmouse>", mc.handleMouse)
