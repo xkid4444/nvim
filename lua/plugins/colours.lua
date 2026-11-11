@@ -31,6 +31,15 @@ return {
         borderless_pickers = false,
         -- Terminal colors
         terminal_colors = true,
+
+        -- NOTE: This function nullifies the `highlights` option
+        overrides = function(colors)
+            return {
+              -- Python variables
+              ["@variable.member.python"] = { fg = "#ffcfff"},
+              ["@constant.python"] = { fg = "#ffcfff"},
+            }
+        end,
       })
       require("cyberdream").load()
     end,
