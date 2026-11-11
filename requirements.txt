@@ -1,0 +1,11 @@
+greenlet==3.5.1
+jupyter_client==8.8.0
+jupyter_core==5.9.1
+msgpack==1.1.2
+platformdirs==4.10.0
+pynvim==0.6.0
+python-dateutil==2.9.0.post0
+pyzmq==27.1.0
+six==1.17.0
+tornado==6.5.6
+traitlets==5.15.0
